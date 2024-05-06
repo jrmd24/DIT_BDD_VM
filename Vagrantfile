@@ -82,6 +82,7 @@ Vagrant.configure("2") do |config|
         SHELL
 #cfg={_id: "r2", members:[{_id:0, host: "127.0.0.1:29906"},{_id:1,host: "127.0.0.1:29907"}]}
         cfg={}
+        cfg['_id']= machine['mongodbs'][0]['replSet']
         
         members = []
         member_id = 0
@@ -94,7 +95,6 @@ Vagrant.configure("2") do |config|
             mongoDbRootFolder = "#{dbStorageRootDir}/#{mongoName}"
             mongoDbDataFolder = "#{mongoDbRootFolder}/data"
             mongoDbConfigfile = "#{mongoDbRootFolder}/#{mongoConfFilePrefix}#{mongoPort}.log"
-
 
             mongo_vm.vm.provision "mongodb_conf_#{machineName}_#{mongoName}", type: "shell", inline: <<-SHELL
                 
@@ -110,14 +110,13 @@ Vagrant.configure("2") do |config|
                 sudo mkdir #{mongoDbDataFolder}
               fi
               
-              sudo mongod --replSet #{replSetName} --port #{mongoPort} --#{mongoType} --dbpath "#{mongoDbDataFolder}" --logpath "#{mongoDbConfigfile}" --transitionToAuth --keyFile #{dbStorageRootDir}/mongo_keyfile.txt --bind_ip_all --logappend --fork
+              sudo mongod --replSet #{replSetName} --port #{mongoPort} #{mongoType} --dbpath "#{mongoDbDataFolder}" --logpath "#{mongoDbConfigfile}" --transitionToAuth --keyFile #{dbStorageRootDir}/mongo_keyfile.txt --bind_ip_all --logappend --fork
               
               #sudo mongosh --port #{mongoPort} admin --eval 'db.createUser({ user: "mongoadmin", pwd: "ditpass", roles: [{ role: "userAdminAnyDatabase", db: "admin" }, { role: "readWriteAnyDatabase", db: "admin" }] })'
 
             SHELL
 
             
-            cfg['_id']= replSetName
             current_member = {}
             current_member['_id']= member_id
             current_member['host']= "#{machineIp}:#{mongoPort}"

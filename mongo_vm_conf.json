@@ -7,21 +7,21 @@
             {
                 "name": "s11",
                 "replSet": "shard1",
-                "type": "shardsvr",
+                "type": "--shardsvr",
                 "port": "27301",
                 "configFilePrefix": "repl_"
             },
             {
                 "name": "s12",
                 "replSet": "shard1",
-                "type": "shardsvr",
+                "type": "--shardsvr",
                 "port": "27302",
                 "configFilePrefix": "repl_"
             },
             {
                 "name": "s13",
                 "replSet": "shard1",
-                "type": "shardsvr",
+                "type": "",
                 "port": "27303",
                 "configFilePrefix": "repl_"
             }
@@ -35,22 +35,106 @@
             {
                 "name": "s21",
                 "replSet": "shard2",
-                "type": "shardsvr",
+                "type": "--shardsvr",
                 "port": "27401",
                 "configFilePrefix": "repl_"
             },
             {
                 "name": "s22",
                 "replSet": "shard2",
-                "type": "shardsvr",
+                "type": "--shardsvr",
                 "port": "27402",
                 "configFilePrefix": "repl_"
             },
             {
                 "name": "s23",
                 "replSet": "shard2",
-                "type": "shardsvr",
+                "type": "--shardsvr",
                 "port": "27403",
+                "configFilePrefix": "repl_"
+            }
+        ]
+    },
+    {
+        "name": "msvr3",
+        "ip": "192.168.33.17",
+        "dbStorageRootPath": "/var/mongodbs",
+        "mongodbs": [
+            {
+                "name": "s31",
+                "replSet": "shard3",
+                "type": "--shardsvr",
+                "port": "27501",
+                "configFilePrefix": "repl_"
+            },
+            {
+                "name": "s32",
+                "replSet": "shard3",
+                "type": "--shardsvr",
+                "port": "27502",
+                "configFilePrefix": "repl_"
+            },
+            {
+                "name": "s33",
+                "replSet": "shard3",
+                "type": "--shardsvr",
+                "port": "27503",
+                "configFilePrefix": "repl_"
+            }
+        ]
+    },
+    {
+        "name": "msvr4",
+        "ip": "192.168.33.18",
+        "dbStorageRootPath": "/var/mongodbs",
+        "mongodbs": [
+            {
+                "name": "s41",
+                "replSet": "shard4",
+                "type": "--shardsvr",
+                "port": "27601",
+                "configFilePrefix": "repl_"
+            },
+            {
+                "name": "s42",
+                "replSet": "shard4",
+                "type": "--shardsvr",
+                "port": "27602",
+                "configFilePrefix": "repl_"
+            },
+            {
+                "name": "s43",
+                "replSet": "shard4",
+                "type": "",
+                "port": "27603",
+                "configFilePrefix": "repl_"
+            }
+        ]
+    },
+    {
+        "name": "msvr5",
+        "ip": "192.168.33.19",
+        "dbStorageRootPath": "/var/mongodbs",
+        "mongodbs": [
+            {
+                "name": "c1",
+                "replSet": "conf",
+                "type": "--configsvr",
+                "port": "27201",
+                "configFilePrefix": "repl_"
+            },
+            {
+                "name": "c2",
+                "replSet": "conf",
+                "type": "--configsvr",
+                "port": "27202",
+                "configFilePrefix": "repl_"
+            },
+            {
+                "name": "c3",
+                "replSet": "conf",
+                "type": "--configsvr",
+                "port": "27203",
                 "configFilePrefix": "repl_"
             }
         ]
