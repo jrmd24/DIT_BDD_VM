@@ -96,7 +96,7 @@ Vagrant.configure("2") do |config|
             mongoDbDataFolder = "#{mongoDbRootFolder}/data"
             mongoDbConfigfile = "#{mongoDbRootFolder}/#{mongoConfFilePrefix}#{mongoPort}.log"
 
-            mongo_vm.vm.provision "mongodb_conf_#{machineName}_#{mongoName}", type: "shell", inline: <<-SHELL
+            mongo_vm.vm.provision "mongodb_conf_#{machineName}_#{mongoName}", type: "shell", run: "always", inline: <<-SHELL
                 
               if [ -d "#{mongoDbRootFolder}" ]; then
                 echo "'#{mongoDbRootFolder}' found"
@@ -126,7 +126,7 @@ Vagrant.configure("2") do |config|
 
         cfg['members'] = members
 
-        mongo_vm.vm.provision "replset_conf_#{machineName}", type: "shell", inline: <<-SHELL
+        mongo_vm.vm.provision "replset_conf_#{machineName}", type: "shell", run: "once", inline: <<-SHELL
                             
            sudo mongosh --port #{machine['mongodbs'][0]['port']}  admin --eval 'rs.initiate(#{cfg.to_json})'
 
